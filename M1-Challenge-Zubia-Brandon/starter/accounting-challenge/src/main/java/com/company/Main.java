@@ -27,14 +27,21 @@ public class Main {
     public static void main(String[] args) {
 
         List<Customer> customerList = new ArrayList<>();
+        
+        // HashMap keeps track of the unique accounts and keeps track  
+        // of their index in customerList
         Map<Integer, Integer> accountsSeenWithIndex = new HashMap<>();
         int idx = 0;
 
         for (String[] customer: customerData) {
             int customerId = Integer.parseInt(customer[0]);
-
+            
+            // Check to see if the current account has been seen before
+            // if so, just append charge data to charges list
             if (accountsSeenWithIndex.containsKey(customerId)) {
-
+                
+                // Retrieve customer from customerList using the index stored
+                // in hashmap
                 int idxCustomer = accountsSeenWithIndex.get(customerId);
                 Customer currentCustomer = customerList.get(idxCustomer);
 
@@ -46,7 +53,10 @@ public class Main {
 
                 currentCustomer.getCharges().add(newRecord);
 
-            } else {
+            } 
+            // New accounts that havent been seen are put into customerList
+            // and ID and index are stored in hashmap when accessing the same account occurs
+            else {
                 String customerName = customer[1];
                 int chargeAmount = Integer.parseInt(customer[2]);
                 String chargeDate = customer[3];
@@ -65,7 +75,9 @@ public class Main {
                 idx++;
             }
         }
-
+        
+        // Separates the accounts into two lists by distinguishing
+        // which account balances are positive or negative
         List<Customer> positiveBalances = new ArrayList<>();
         List<Customer> negativeBalances = new ArrayList<>();
 
@@ -77,7 +89,6 @@ public class Main {
             }
         }
 
-        //Update this
         System.out.println("Positive accounts:" + positiveBalances);
         System.out.println("Negative accounts:" + negativeBalances);
     }
