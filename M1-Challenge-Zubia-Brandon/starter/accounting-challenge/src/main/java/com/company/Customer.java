@@ -25,7 +25,7 @@ public class Customer {
     }
 
     public int getBalance() {
-        //update this
+        
         int balance = 0;
         List<AccountRecord> customerCharges = getCharges();
 
@@ -42,7 +42,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        //update this
         return String.format(id + " " + name + " " + getBalance());
     }
 }
